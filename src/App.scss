@@ -1,0 +1,22 @@
+$main-black: #000;
+$dark-grey: #121212;
+$light-grey: #181818;
+$content-grey: #b2b2b2;
+$text-main-color: #bababa;
+$main-red: #eb493b;
+$slider-bg: #5e5e5e;
+
+@font-face {
+  font-family: "Circular Light";
+  src: url("./assets/fonts/CircularStd-Light.otf");
+}
+
+@font-face {
+  font-family: "Circular Medium";
+  src: url("./assets/fonts/CircularStd-Medium.otf");
+}
+
+@font-face {
+  font-family: "Circular Black";
+  src: url("./assets/fonts/CircularStd-Black.otf");
+}
