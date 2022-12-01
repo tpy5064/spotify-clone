@@ -4,13 +4,18 @@ import Navbar from './components/Navbar';
 import Layout from './components/Layout';
 import { useState, useRef } from 'react';
 import sth from "./assets/songs/Stairway_to_Heaven.mp3"
-
+import dirwk from "./assets/songs/Do I Really Wanna Know.mp3"
+import Home from './components/Home';
+import STHART from "./assets/albumart/Stairway_to_Heaven.jpg"
+import DIRWKART from "./assets/albumart/Do I Really Wanna Know.jpg"
+import SUGARART from "./assets/albumart/Sugar-Maroon5.jpg"
 
 function createSong(songName, artistName, audioSrc, albumArtSrc='', lyricsSrc='') {
   this.songName = songName;
   this.artistName = artistName;
   this.audioSrc = audioSrc;
   this.lyricsSrc = lyricsSrc;
+  this.albumArtSrc = albumArtSrc;
 }
 
 let rockPlaylist = [
@@ -18,13 +23,15 @@ let rockPlaylist = [
     songName: "Stairway to Heaven",
     artistName: "Led Zeppelin",
     audioSrc: sth,
-    lyricsSrc: "../../assets/lyrics/Stairway_to_heaven.txt"
+    lyricsSrc: "../../assets/lyrics/Stairway_to_heaven.txt",
+    albumArtSrc: STHART
   },
   {
     songName: "Do I Really Wanna Know",
     artistName: "Arctic Monkeys",
-    audioSrc: "../../assets/songs/Do I Really Wanna Know.mp3",
-    lyricsSrc: "../../assets/songs/Do I Really Wanna Know.txt"
+    audioSrc: dirwk,
+    lyricsSrc: "../../assets/songs/Do I Really Wanna Know.txt",
+    albumArtSrc: DIRWKART
   }
 ];
 
@@ -33,7 +40,64 @@ let popPlaylist = [
     songName: "Sugar",
     artistName: "Maroon 5",
     audioSrc: "../../assets/songs/Sugar-Maroon5.mp3",
-    lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt"
+    lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
+    albumArtSrc: SUGARART 
+  },
+  {
+    songName: "Sugar",
+    artistName: "Maroon 5",
+    audioSrc: "../../assets/songs/Sugar-Maroon5.mp3",
+    lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
+    albumArtSrc: SUGARART 
+  },
+  {
+    songName: "Sugar",
+    artistName: "Maroon 5",
+    audioSrc: "../../assets/songs/Sugar-Maroon5.mp3",
+    lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
+    albumArtSrc: SUGARART 
+  },
+  {
+    songName: "Sugar",
+    artistName: "Maroon 5",
+    audioSrc: "../../assets/songs/Sugar-Maroon5.mp3",
+    lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
+    albumArtSrc: SUGARART 
+  },
+  {
+    songName: "Sugar",
+    artistName: "Maroon 5",
+    audioSrc: "../../assets/songs/Sugar-Maroon5.mp3",
+    lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
+    albumArtSrc: SUGARART 
+  },
+  {
+    songName: "Sugar",
+    artistName: "Maroon 5",
+    audioSrc: "../../assets/songs/Sugar-Maroon5.mp3",
+    lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
+    albumArtSrc: SUGARART 
+  },
+  {
+    songName: "Sugar",
+    artistName: "Maroon 5",
+    audioSrc: "../../assets/songs/Sugar-Maroon5.mp3",
+    lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
+    albumArtSrc: SUGARART 
+  },
+  {
+    songName: "Sugar",
+    artistName: "Maroon 5",
+    audioSrc: "../../assets/songs/Sugar-Maroon5.mp3",
+    lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
+    albumArtSrc: SUGARART 
+  },
+  {
+    songName: "Sugar",
+    artistName: "Maroon 5",
+    audioSrc: "../../assets/songs/Sugar-Maroon5.mp3",
+    lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
+    albumArtSrc: SUGARART 
   }
 ];
 
@@ -52,10 +116,16 @@ function App() {
     console.log(playStatus);
   }
 
+  function playSong(song) {
+    setPlayStatus(true);
+  }
+
   return (
     <>
       <Routes>
-        <Route path="/" element={<Layout setPlayPause={handlePlayClick} playStatus={playStatus} playlist={playlist}/>} ></Route>
+        <Route path="/" element={<Layout setPlayPause={handlePlayClick} playStatus={playStatus} playlist={playlist} playSong={playSong}/>} >
+          <Route index element={<Home masterlist={playlist}/>} />
+        </Route>
       </Routes>
     </>
   );
