@@ -4,8 +4,9 @@ import Navbar from './components/Navbar';
 import Layout from './components/Layout';
 import { useState, useRef } from 'react';
 import sth from "./assets/songs/Stairway_to_Heaven.mp3"
-import dirwk from "./assets/songs/Do I Really Wanna Know.mp3"
 import Home from './components/Home';
+import dirwk from "./assets/songs/Do I Really Wanna Know.mp3"
+import sugar from "./assets/songs/Sugar-Maroon5.mp3"
 import STHART from "./assets/albumart/Stairway_to_Heaven.jpg"
 import DIRWKART from "./assets/albumart/Do I Really Wanna Know.jpg"
 import SUGARART from "./assets/albumart/Sugar-Maroon5.jpg"
@@ -39,65 +40,37 @@ let popPlaylist = [
   {
     songName: "Sugar",
     artistName: "Maroon 5",
-    audioSrc: "../../assets/songs/Sugar-Maroon5.mp3",
+    audioSrc: sugar,
     lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
-    albumArtSrc: SUGARART 
+    albumArtSrc: SUGARART
   },
   {
     songName: "Sugar",
     artistName: "Maroon 5",
-    audioSrc: "../../assets/songs/Sugar-Maroon5.mp3",
+    audioSrc: sugar,
     lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
-    albumArtSrc: SUGARART 
+    albumArtSrc: SUGARART
   },
   {
     songName: "Sugar",
     artistName: "Maroon 5",
-    audioSrc: "../../assets/songs/Sugar-Maroon5.mp3",
+    audioSrc: sugar,
     lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
-    albumArtSrc: SUGARART 
+    albumArtSrc: SUGARART
   },
   {
     songName: "Sugar",
     artistName: "Maroon 5",
-    audioSrc: "../../assets/songs/Sugar-Maroon5.mp3",
+    audioSrc: sugar,
     lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
-    albumArtSrc: SUGARART 
+    albumArtSrc: SUGARART
   },
   {
     songName: "Sugar",
     artistName: "Maroon 5",
-    audioSrc: "../../assets/songs/Sugar-Maroon5.mp3",
+    audioSrc: sugar,
     lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
-    albumArtSrc: SUGARART 
-  },
-  {
-    songName: "Sugar",
-    artistName: "Maroon 5",
-    audioSrc: "../../assets/songs/Sugar-Maroon5.mp3",
-    lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
-    albumArtSrc: SUGARART 
-  },
-  {
-    songName: "Sugar",
-    artistName: "Maroon 5",
-    audioSrc: "../../assets/songs/Sugar-Maroon5.mp3",
-    lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
-    albumArtSrc: SUGARART 
-  },
-  {
-    songName: "Sugar",
-    artistName: "Maroon 5",
-    audioSrc: "../../assets/songs/Sugar-Maroon5.mp3",
-    lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
-    albumArtSrc: SUGARART 
-  },
-  {
-    songName: "Sugar",
-    artistName: "Maroon 5",
-    audioSrc: "../../assets/songs/Sugar-Maroon5.mp3",
-    lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
-    albumArtSrc: SUGARART 
+    albumArtSrc: SUGARART
   }
 ];
 
@@ -121,7 +94,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Layout setPlayPause={handlePlayClick} playStatus={playStatus} playlist={playlist}/>} >
-          <Route index element={<Home />} /> 
+          <Route index element={<Home masterlist={playlist}/>} /> 
         </Route>
       </Routes>
     </>
