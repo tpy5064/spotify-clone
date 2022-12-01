@@ -7,7 +7,7 @@ import skipBackwardIcon from "../../assets/svg/skip_back.svg";
 import shuffleIcon from "../../assets/svg/shuffle.svg";
 import repeatIcon from "../../assets/svg/repeat.svg";
 import volumeIcon from "../../assets/svg/volume.svg";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import song from "../../assets/songs/Stairway_to_Heaven.mp3"
 
 

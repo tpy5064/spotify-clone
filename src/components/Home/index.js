@@ -1,14 +1,19 @@
 import React from "react";
 import "./styles.scss";
 
-const Home = ({ masterlist }) => {
+const Home = ({ masterlist, onPlaySong }) => {
   function generateSongs(playlist) {
     let songs = [];
     playlist.forEach((list) => {
       list.forEach((item) => {
         songs.push(
-          <div className="song">
-            <img src={item.albumArtSrc} audioSrc={item.audioSrc}></img>
+          <div
+            className="song"
+            onDoubleClick={() => {
+              onPlaySong(item.audioSrc);
+            }}
+          >
+            <img src={item.albumArtSrc}></img>
             <p>{item.songName}</p>
             <p>{item.artistName}</p>
           </div>
@@ -26,9 +31,7 @@ const Home = ({ masterlist }) => {
       <div className="recents">
         <div className="recent-songs">
           <span>Your Recent Songs</span>
-          <div className="song-container">
-            {generateSongs(masterlist)}
-          </div>
+          <div className="song-container">{generateSongs(masterlist)}</div>
         </div>
         <div className="created-playlists">
           <span>Your Playlists</span>
@@ -36,7 +39,7 @@ const Home = ({ masterlist }) => {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default Home;
