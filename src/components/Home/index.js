@@ -1,13 +1,13 @@
 import React from "react";
 import "./styles.scss";
 
-const Home = ({ masterlist, playSong }) => {
+const Home = ({ masterlist }) => {
   function generateSongs(playlist) {
     let songs = [];
     playlist.forEach((list) => {
       list.forEach((item) => {
         songs.push(
-          <div className="song" onDoubleClick={() => {playSong(item.audioSrc)}}>
+          <div className="song">
             <img src={item.albumArtSrc} audioSrc={item.audioSrc}></img>
             <p>{item.songName}</p>
             <p>{item.artistName}</p>
@@ -36,7 +36,7 @@ const Home = ({ masterlist, playSong }) => {
         </div>
       </div>
     </div>
-  );
+  )
 };
 
 export default Home;

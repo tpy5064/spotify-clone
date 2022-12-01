@@ -3,8 +3,10 @@ import React from "react";
 import Navbar from "../Navbar";
 import { Outlet } from "react-router-dom";
 import Controls from "../Controls";
+import { useState } from "react";
 
 const Layout = ({ setPlayPause, playStatus, playlist, playSong }) => {
+
 
   return (
     <div className="App">

@@ -116,15 +116,12 @@ function App() {
     console.log(playStatus);
   }
 
-  function playSong(song) {
-    setPlayStatus(true);
-  }
 
   return (
     <>
       <Routes>
-        <Route path="/" element={<Layout setPlayPause={handlePlayClick} playStatus={playStatus} playlist={playlist} playSong={playSong}/>} >
-          <Route index element={<Home masterlist={playlist}/>} />
+        <Route path="/" element={<Layout setPlayPause={handlePlayClick} playStatus={playStatus} playlist={playlist}/>} >
+          <Route index element={<Home />} /> 
         </Route>
       </Routes>
     </>
