@@ -3,9 +3,10 @@ import React from "react";
 import Navbar from "../Navbar";
 import { Outlet } from "react-router-dom";
 import Controls from "../Controls";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
-const Layout = ({ setPlayPause, playStatus, playlist }) => {
+const Layout = ({ playsong, play }) => {
+
 
   return (
     <div className="App">
@@ -13,11 +14,7 @@ const Layout = ({ setPlayPause, playStatus, playlist }) => {
       <div className="page">
         <Outlet />
       </div>
-      <Controls
-        setPlayPause={setPlayPause}
-        playStatus={playStatus}
-        playlist={playlist}
-      />
+      <Controls/>
     </div>
   );
 };

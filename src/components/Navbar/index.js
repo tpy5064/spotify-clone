@@ -7,8 +7,11 @@ import homeIcon from "../../assets/svg/home.svg";
 import searchIcon from "../../assets/svg/search.svg";
 import libraryIcon from "../../assets/svg/library.svg";
 import likedSongsIcon from "../../assets/svg/liked_songs.svg";
-
+import { songContext } from "../Contexts/songContext";
+import { useContext } from "react";
+import uploadIcon from "../../assets/svg/upload.svg";
 const Navbar = () => {
+  const { songPlaying } = useContext(songContext);
   return (
     <div className="navbar">
       <Link className="logo" to="/">
@@ -22,16 +25,7 @@ const Navbar = () => {
         <NavLink
           exact="true"
           activeclassname="active"
-          to="/"
-          className="search"
-        >
-          <img src={searchIcon} alt="Search Icon" />
-          <span>Search</span>
-        </NavLink>
-        <NavLink
-          exact="true"
-          activeclassname="active"
-          to="/"
+          to="/library"
           className="library"
         >
           <img src={libraryIcon} alt="Library Icon" />
@@ -41,22 +35,31 @@ const Navbar = () => {
           exact="true"
           activeclassname="active"
           to="/"
-          className="create-playlist"
+          className="liked-songs"
         >
-          <img src={createPlaylistIcon} alt="Create Playlist Icon" />
-          <span>Create Playlist</span>
+          <img src={likedSongsIcon} alt="Liked Songs Icon" />
+          <span>Liked Songs</span>
         </NavLink>
         <NavLink
           exact="true"
           activeclassname="active"
-          to="/"
-          className="liked-songs"
+          to="/upload"
+          className="upload-songs"
         >
-          <img src={likedSongsIcon} alt="Liked Songs Icon"/>
-          <span>Liked Songs</span>
+          <img src={uploadIcon} alt="Upload Songs Icon" />
+          <span>Upload Song</span>
         </NavLink>
         <div className="line" />
       </nav>
+      <img
+        className="album-cover"
+        src={
+          songPlaying.albumArtSrc
+            ? songPlaying.albumArtSrc
+            : "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA="
+        }
+        alt="Current Song Album Cover"
+      />
     </div>
   );
 };

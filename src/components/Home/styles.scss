@@ -3,9 +3,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-
     
-
     .home-title {
         width: 100%;
         height: 22%;
@@ -26,6 +24,16 @@
         height: 78%;
         background: rgba(0, 0, 0, 0.5);
 
+        ::-webkit-scrollbar {
+            background: none;
+            
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;    
+        }
+
         .recent-songs {
             width: 100%;
             height: 40%;
@@ -34,6 +42,7 @@
             span {
                 font-family: "Circular Black";
                 font-size: 22px;
+                color: white;
             }
 
             .song-container {
@@ -42,24 +51,15 @@
                 display: flex;
                 margin-top: 2rem;
                 overflow-x: scroll;
-                -webkit-appearance: none;
-
-                ::-webkit-scrollbar-track {
-                    background: #f1f1f1;
-                }
-                
-                ::-webkit-scrollbar-thumb {
-                    background: #888;
-                }
-                
-                
 
                 .song {
                     margin-right: 2rem;
+                    cursor: pointer;
 
                     img {
                         width: 225px;
                         height: 225px;
+                        
                     }
 
                     p {
@@ -72,7 +72,7 @@
             }
         }
 
-        .created-playlists {
+        .queue {
             width: 100%;
             height: 40%;
             padding: 3rem;
@@ -80,7 +80,35 @@
             span {
                 font-family: "Circular Black";
                 font-size: 22px;
+                color: white;
+            }
+
+            .song-container {
+                width: 100%;
+                height: auto;
+                display: flex;
+                margin-top: 2rem;
+                overflow-x: scroll;
+
+                .song {
+                    margin-right: 2rem;
+                    cursor: pointer;
+
+                    img {
+                        width: 225px;
+                        height: 225px;
+                        
+                    }
+
+                    p {
+                        font-family: "Circular Medium";
+                        font-size: 16px;
+                        margin: 1rem 0;
+                        color: white;
+                    }
+                }
             }
         }
     }
 }
+

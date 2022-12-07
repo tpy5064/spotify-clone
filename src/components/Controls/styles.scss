@@ -47,13 +47,17 @@
             height: 55%;
             display: flex;
             justify-content: space-evenly;
+            align-items: center;
 
             button {
                 cursor: pointer;
+                height: fit-content;
+                width: fit-content;
             }
 
             .repeat-icon {
                 width: 20px;
+                padding: 5px;
             }
 
             .play-icon {
@@ -72,6 +76,11 @@
         width: 100%;
         font-family: 'Circular Light';
         font-size: 12px;
+        position: relative; 
+
+        span {
+            width: 35px;
+        }
 
         .progress-slider {
             -webkit-appearance: none;
@@ -93,6 +102,7 @@
         width: 10%;
         height: 100%;
         align-items: center;
+        margin-right: 1rem;
 
 
         .slider-container {
@@ -114,9 +124,16 @@
         }
     }
 
+
+
+
     button {
         background: none;
         border: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         
         
         img:not(.play-icon) {
@@ -127,5 +144,12 @@
         
     }
 
+    .is-active {
+        width: 3px;
+        height: 3px;
+        border-radius: 2px;
+        background: white;
+        margin-top: 2px;
+    }
     
 }
