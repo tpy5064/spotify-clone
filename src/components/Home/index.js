@@ -10,10 +10,13 @@ const Home = () => {
     setSongPlaying,
     setPlayStatus,
     handlePlayingAudio,
-    masterlist
+    masterlist,
+    currentList,
+    setCurrentList,
+    updateRecents
   } = useContext(songContext);
 
-  function generateSongs(playlist) {
+  function generateSongs(playlist, isQueue = false) {
     let songs = [];
     for (let i = 0; i < playlist.length; i++) {
       songs.push(
@@ -23,8 +26,9 @@ const Home = () => {
           onClick={() => {
             setSongPlaying(playlist[i]);
             handlePlayingAudio(playlist[i].audioSrc);
-            console.log(songPlaying);
             setPlayStatus(true);
+            isQueue ? setCurrentList(queue) : setCurrentList(masterlist);
+            updateRecents(playlist[i]);
           }}
         >
           <img src={playlist[i].albumArtSrc}></img>
@@ -48,7 +52,13 @@ const Home = () => {
         </div>
         <div className="queue">
           <span>Your Queue</span>
-          <div className="song-container">{generateSongs(queue)}</div>
+          <div className="song-container">
+            {queue.length > 0 ? (
+              generateSongs(queue, true)
+            ) : (
+              <h2 className="queue-empty">Your queue is currently empty!</h2>
+            )}
+          </div>
         </div>
       </div>
     </div>

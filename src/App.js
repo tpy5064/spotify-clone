@@ -13,6 +13,7 @@ import sugar from "./assets/songs/Sugar-Maroon5.mp3";
 import { songContext } from "./components/Contexts/songContext";
 import Library from "./components/Library";
 import Upload from "./components/Upload";
+import Likes from "./components/Likes";
 
 let playlist = [
   {
@@ -23,6 +24,7 @@ let playlist = [
     lyricsSrc: "../../assets/lyrics/Stairway_to_heaven.txt",
     albumArtSrc: STHART,
     dateAdded: "12/01/2022",
+    isLiked: false,
   },
   {
     songName: "Do I Really Wanna Know",
@@ -32,6 +34,7 @@ let playlist = [
     lyricsSrc: "../../assets/songs/Do I Really Wanna Know.txt",
     albumArtSrc: DIRWKART,
     dateAdded: "11/27/2022",
+    isLiked: false,
   },
   {
     songName: "Sugar",
@@ -41,6 +44,7 @@ let playlist = [
     lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
     albumArtSrc: SUGARART,
     dateAdded: "12/05/2022",
+    isLiked: false,
   },
 ];
 
@@ -50,12 +54,14 @@ function App() {
   const [currentTime, setCurrentTime] = useState(0);
   const [songPlaying, setSongPlaying] = useState({});
   const [masterlist, setMasterlist] = useState(playlist);
-  const [queue, setQueue] = useState(playlist);
+  const [queue, setQueue] = useState([]);
   const [libraryList, setLibraryList] = useState(playlist);
+  const [likedList, setLikedList] = useState([]);
   const [queueIndex, setQueueIndex] = useState(0);
   const [isShuffle, setIsShuffle] = useState(false);
   const [isRepeat, setIsRepeat] = useState(false);
   const [volumePercentage, setVolumePercentage] = useState(1);
+  const [currentList, setCurrentList] = useState([]);
 
   let playingAudioRef = useRef(new Audio());
   const intervalRef = useRef();
@@ -93,6 +99,27 @@ function App() {
     playingAudioRef.current.loop = false;
   };
 
+  const findListIndex = (songlist, song) => {
+    for(let i = 0; i < songlist.length; i++) {
+      if (songlist[i].songName === song.songName) {
+        return i;
+      }
+    }
+  } 
+
+  const updateRecents = (song) => {
+    for (let i = 0; i < masterlist.length; i++) {
+      if (masterlist[i].songName === song.songName) {
+        const updated = masterlist;
+        updated.splice(i, 1);
+        setMasterlist([song, ...updated]);
+        return;
+      }
+    }
+    setMasterlist([song, ...masterlist]);
+    return;
+  }
+
   return (
     <>
       <songContext.Provider
@@ -112,6 +139,8 @@ function App() {
           setCurrentTime,
           masterlist,
           setMasterlist,
+          likedList,
+          setLikedList,
           intervalRef,
           playingAudioRef,
           isShuffle,
@@ -124,6 +153,10 @@ function App() {
           setVolumePercentage,
           libraryList,
           setLibraryList,
+          currentList,
+          setCurrentList,
+          findListIndex,
+          updateRecents
         }}
       >
         <Routes>
@@ -131,6 +164,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/library" element={<Library />} />
             <Route path="/upload" element={<Upload />} />
+            <Route path="/likes" element={<Likes />} />
           </Route>
         </Routes>
       </songContext.Provider>

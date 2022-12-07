@@ -34,7 +34,7 @@ const Navbar = () => {
         <NavLink
           exact="true"
           activeclassname="active"
-          to="/"
+          to="/likes"
           className="liked-songs"
         >
           <img src={likedSongsIcon} alt="Liked Songs Icon" />

@@ -3,17 +3,23 @@ import "./styles.scss";
 import { useContext, useRef } from "react";
 import { songContext } from "../Contexts/songContext";
 import plusIcon from "../../assets/svg/plus_icon.svg";
-import heartIcon from "../../assets/svg/liked_songs.svg"
+import heartIcon from "../../assets/svg/liked_songs.svg";
 
 const Library = () => {
   const {
     queue,
+    setQueue,
+    likedList,
+    setLikedList,
     masterlist,
     handlePlayingAudio,
     setSongPlaying,
     setPlayStatus,
     libraryList,
     setLibraryList,
+    currentList,
+    setCurrentList,
+    updateRecents
   } = useContext(songContext);
 
   const libraryRef = useRef();
@@ -22,6 +28,8 @@ const Library = () => {
     handlePlayingAudio(song.audioSrc);
     setSongPlaying(song);
     setPlayStatus(true);
+    setCurrentList(libraryList);
+    updateRecents(song);
   };
 
   const handleSearch = (val) => {
@@ -32,6 +40,29 @@ const Library = () => {
       setLibraryList(masterlist);
       libraryRef.current.forceUpdate();
     }
+  };
+
+  const handleLikeSong = (e, song) => {
+    song.isLiked = true;
+    console.log("liked!");
+    for (let i = 0; i < likedList.length; i++) {
+      if (likedList[i].songName === song.songName) return;
+    }
+    setLikedList([...likedList, song]);
+    e.target.style.filter = "brightness(0) saturate(100%)";
+    e.target.style.filter =
+      "invert(43%) sepia(34%) saturate(7275%) hue-rotate(340deg) brightness(96%) contrast(91%)";
+  };
+
+  const handleAddQueue = (e, song) => {
+    setQueue([...queue, song]);
+    e.target.style.filter = "brightness(0) saturate(100%)";
+    e.target.style.filter =
+      "invert(52%) sepia(62%) saturate(568%) hue-rotate(88deg) brightness(97%) contrast(93%)";
+    const p = new Promise((r) => setTimeout(r, 250));
+    e.target.style.filter = "brightness(0) saturate(100%)";
+    e.target.style.filter =
+      "invert(89%) sepia(6%) saturate(108%) hue-rotate(325deg) brightness(86%) contrast(93%)";
   };
 
   const generateSongs = (playlist) => {
@@ -57,21 +88,35 @@ const Library = () => {
             <button></button>
           </div>
           <div className="btn-container">
-              <button title="Add To Queue">
-                <img
-                  src={plusIcon}
-                  alt="Add To Playlist Icon"
-                  className="btn"
-                />
-              </button>
-              <button title="Like Song">
-                <img
-                  src={heartIcon}
-                  alt="Add To Playlist Icon"
-                  className="btn"
-                />
-              </button>
-            </div>
+            <button
+              title="Add To Queue"
+              onClick={(e) => {
+                handleAddQueue(e, playlist[i]);
+              }}
+            >
+              <img src={plusIcon} alt="Add To Playlist Icon" className="btn" />
+            </button>
+            <button
+              title="Like Song"
+              onClick={(e) => {
+                handleLikeSong(e, playlist[i]);
+              }}
+            >
+              <img
+                src={heartIcon}
+                alt="Add To Playlist Icon"
+                className="btn"
+                style={
+                  playlist[i].isLiked
+                    ? {
+                        filter:
+                          "invert(43%) sepia(34%) saturate(7275%) hue-rotate(340deg) brightness(96%) contrast(91%)",
+                      }
+                    : {}
+                }
+              />
+            </button>
+          </div>
           <div className="song-album">
             <span>{playlist[i].albumName}</span>
           </div>

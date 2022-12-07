@@ -61,9 +61,7 @@ const Upload = () => {
       URL.createObjectURL(uploadLyricsSrc.current.files[0])
     );
     console.log(createdSong);
-    setMasterlist([...masterlist, createdSong]);
     setLibraryList([...libraryList, createdSong]);
-    
   };
 
   return (

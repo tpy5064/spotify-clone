@@ -34,7 +34,9 @@ const Controls = () => {
     handleRepeat,
     handleNoRepeat,
     volumePercentage,
-    setVolumePercentage
+    setVolumePercentage,
+    findListIndex,
+    currentList,
   } = useContext(songContext);
 
   
@@ -42,6 +44,30 @@ const Controls = () => {
   const playPercentage = songDuration
     ? `${(currentTime / songDuration) * 100}%`
     : "0%";
+
+  const skipForward = (song) => {
+    let idx = findListIndex(currentList, song);
+    if (idx < currentList.length - 1) {
+      idx++;
+    } else {
+      idx = 0;
+    }
+    setSongPlaying(currentList[idx])
+    handlePlayingAudio(currentList[idx].audioSrc);
+    setPlayStatus(true);
+  }
+
+  const skipBackward = (song) => {
+    let idx = findListIndex(currentList, song);
+    if (idx > 0) {
+      idx--;
+    } else {
+      idx = currentList.length - 1;
+    }
+    setSongPlaying(currentList[idx])
+    handlePlayingAudio(currentList[idx].audioSrc);
+    setPlayStatus(true);
+  }
 
   return (
     <div className="controls">
@@ -61,7 +87,7 @@ const Controls = () => {
             />
             <div className={isShuffle ? "is-active" : ""}></div>
           </button>
-          <button>
+          <button onClick={() => {skipBackward(songPlaying)}}>
             <img src={skipBackwardIcon} alt="Skip Back Icon" />
           </button>
           <button onClick={() => {}}>
@@ -75,8 +101,8 @@ const Controls = () => {
               }}
             />
           </button>
-          <button>
-            <img src={skipForwardIcon} alt="Skip Back Icon" />
+          <button onClick={() => {skipForward(songPlaying)}}>
+            <img src={skipForwardIcon} alt="Skip Forward Icon" />
           </button>
           <button>
             <img src={repeatIcon} alt="Repeat Icon" className="repeat-icon" onClick={() => {

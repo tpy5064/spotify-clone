@@ -77,6 +77,12 @@
             height: 40%;
             padding: 3rem;
 
+            .queue-empty {
+                font-family: "Circular Medium";
+                color: white;
+                font-size: 2rem;
+            };
+
             span {
                 font-family: "Circular Black";
                 font-size: 22px;
