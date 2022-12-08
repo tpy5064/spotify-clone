@@ -28,7 +28,6 @@ const Home = () => {
             handlePlayingAudio(playlist[i].audioSrc);
             setPlayStatus(true);
             isQueue ? setCurrentList(queue) : setCurrentList(masterlist);
-            updateRecents(playlist[i]);
           }}
         >
           <img src={playlist[i].albumArtSrc}></img>

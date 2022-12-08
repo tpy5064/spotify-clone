@@ -1,8 +1,8 @@
 import React from "react";
 import "./styles.scss";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { songContext } from "../Contexts/songContext";
-// import crossIcon from "../../assets/svg/cross.svg";
+//import crossIcon from "../../assets/svg/cross.svg";
 
 const Likes = () => {
   const {
@@ -14,7 +14,7 @@ const Likes = () => {
     setCurrentList,
   } = useContext(songContext);
 
-  const likedRef = useRef();
+  //const likedRef = useRef();
 
   const handleDoubleClick = (song) => {
     handlePlayingAudio(song.audioSrc);
@@ -23,16 +23,18 @@ const Likes = () => {
     setCurrentList(likedList);
   };
 
-  const handleRemove = (e, song) => {
-    e.preventDefault();
-    song.isLiked = false;
-    for (let i = 0; i < likedList.length; i++) {
-      if (likedList[i].songName === song.songName) {
-        setLikedList(likedList.filter(item => item.songName === song.songName))
-      }
-    }
-    likedRef.current.forceUpdate();
-  };
+  // const handleRemove = (e, song) => {
+  //   e.preventDefault();
+  //   song.isLiked = false;
+  //   for (let i = 0; i < likedList.length; i++) {
+  //     if (likedList[i].songName === song.songName) {
+  //       setLikedList(
+  //         likedList.filter((item) => item.songName === song.songName)
+  //       );
+  //     }
+  //   }
+  //   likedRef.current.forceUpdate();
+  // };
 
   const generateSongs = (playlist) => {
     let songs = [];
@@ -55,7 +57,17 @@ const Likes = () => {
               <p className="artist">{playlist[i].artistName}</p>
             </div>
           </div>
-          
+          {/* <div className="btn-container">
+            <button
+              className="btn"
+              title="Remove Like"
+              onClick={(e) => {
+                handleRemove(e, playlist[i]);
+              }}
+            >
+              <img src={crossIcon} alt="Remove Liked Song Icon" />
+            </button>
+          </div> */}
           <div className="song-album">
             <span>{playlist[i].albumName}</span>
           </div>
@@ -69,11 +81,11 @@ const Likes = () => {
   };
 
   return (
-    <div className="liked-page" >
+    <div className="liked-page">
       <div className="liked-title">
         <h1>Your Liked Songs</h1>
       </div>
-      <div className="songlist" >
+      <div className="songlist">
         <div className="description">
           <div className="number">#</div>
           <div className="title">TITLE</div>
