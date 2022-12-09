@@ -1,155 +1,152 @@
 .controls {
-    background: #181818;
-    width: 100%;
-    height: 10%;
-    bottom: 0;
-    left: 0;
-    position: absolute;
-    z-index: 3;
-    min-width: 600px;
+  background: #181818;
+  width: 100%;
+  height: 10%;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  z-index: 3;
+  min-width: 600px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .song-info {
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    font-family: "Circular Light";
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 3rem;
+
+    .song-name {
+      color: white;
+      font-size: 16px;
+      margin: 0;
+    }
+
+    .artist-name {
+      font-size: 14px;
+      margin: 0;
+      padding-top: 5px;
+    }
+  }
+
+  .song-controls {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .song-control-btns {
+      width: 40%;
+      height: 55%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+
+      button {
+        cursor: pointer;
+        height: fit-content;
+        width: fit-content;
+      }
+
+      .repeat-icon {
+        width: 20px;
+        padding: 5px;
+      }
+
+      .play-icon {
+        width: 45px;
+        filter: invert(81%) sepia(0%) saturate(44%) hue-rotate(256deg)
+          brightness(93%) contrast(91%);
+      }
+    }
+  }
+
+  .progress-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    font-family: "Circular Light";
+    font-size: 12px;
+    position: relative;
 
-    .song-info {
-        width: 10%;
-        display: flex;
-        flex-direction: column;
-        font-family: 'Circular Light';
-        align-items: flex-start;
-        justify-content: center;
-        padding-left: 3rem;
-
-
-        .song-name {
-            color: white;
-            font-size: 16px;
-            margin: 0;
-        }
-
-        .artist-name {
-            font-size: 14px;
-            margin: 0;
-            padding-top: 5px;
-        }
+    span {
+      width: 35px;
     }
 
-    .song-controls {
-        width: 40%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    .progress-slider {
+      -webkit-appearance: none;
+      width: 85%;
+      height: 5px;
+      background-color: #5e5e5e;
+      cursor: pointer;
 
-        .song-control-btns {
-            width: 40%;
-            height: 55%;
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-
-            button {
-                cursor: pointer;
-                height: fit-content;
-                width: fit-content;
-            }
-
-            .repeat-icon {
-                width: 20px;
-                padding: 5px;
-            }
-
-            .play-icon {
-                width: 45px;
-                filter: invert(81%) sepia(0%) saturate(44%) hue-rotate(256deg) brightness(93%) contrast(91%);
-
-            }
-        }
-
+      &::-webkit-scrollbar-thumb {
+        color: white;
+      }
     }
+  }
 
-    .progress-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+  .volume {
+    display: flex;
+    width: 10%;
+    height: 100%;
+    align-items: center;
+    margin-right: 1rem;
+
+    .slider-container {
+      width: 60%;
+      height: 5px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .slider {
+        -webkit-appearance: none;
+        background-color: #5e5e5e;
+        height: 5px;
         width: 100%;
-        font-family: 'Circular Light';
-        font-size: 12px;
-        position: relative; 
-
-        span {
-            width: 35px;
-        }
-
-        .progress-slider {
-            -webkit-appearance: none;
-            width: 85%;
-            height: 5px;
-            background-color: #5e5e5e;
-            cursor: pointer;
-
-            &::-webkit-scrollbar-thumb {
-                color: white;
-            }
-        }
-
-        
+      }
     }
 
-    .volume {
-        display: flex;
-        width: 10%;
-        height: 100%;
-        align-items: center;
-        margin-right: 1rem;
+    .lyrics-btn {
+      cursor: pointer;
 
-
-        .slider-container {
-            width: 60%;
-            height: 5px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            .slider {
-                -webkit-appearance: none;
-                background-color: #5e5e5e;
-                height: 5px;
-                width: 100%;
-            }
-
-            
-        }
+      img {
+        width: 20px;
+        filter: invert(78%) sepia(0%) saturate(16%) hue-rotate(148deg)
+          brightness(91%) contrast(93%);
+      }
     }
+  }
 
+  button {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-
-
-    button {
-        background: none;
-        border: none;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        
-        
-        img:not(.play-icon) {
-            width: 30px;
-            filter: invert(78%) sepia(0%) saturate(16%) hue-rotate(148deg) brightness(91%) contrast(93%);
-        }
-        
-        
+    img:not(.play-icon) {
+      width: 30px;
+      filter: invert(78%) sepia(0%) saturate(16%) hue-rotate(148deg)
+        brightness(91%) contrast(93%);
     }
+  }
 
-    .is-active {
-        width: 3px;
-        height: 3px;
-        border-radius: 2px;
-        background: white;
-        margin-top: 2px;
-    }
-    
+  .is-active {
+    width: 3px;
+    height: 3px;
+    border-radius: 2px;
+    background: white;
+    margin-top: 2px;
+  }
 }

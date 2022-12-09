@@ -9,11 +9,18 @@ import Home from "./components/Home";
 import STHART from "./assets/albumart/Stairway_to_Heaven.jpg";
 import DIRWKART from "./assets/albumart/Do I Really Wanna Know.jpg";
 import SUGARART from "./assets/albumart/Sugar-Maroon5.jpg";
+import TLIKTBART from "./assets/albumart/tame-impala-currents.jpg"
+import tliktb from "./assets/songs/Tame Impala - The Less I Know the Better.mp3"
 import sugar from "./assets/songs/Sugar-Maroon5.mp3";
+import sthlyrics from "./assets/lyrics/Stairway to Heaven.txt";
+import sugarlyrics from "./assets/lyrics/Sugar-Maroon5.txt";
+import dirwklyrics from "./assets/lyrics/Do I Really Wanna Know.txt"
+import tliktblyrics from "./assets/lyrics/The Less I Know the Better.txt"
 import { songContext } from "./components/Contexts/songContext";
 import Library from "./components/Library";
 import Upload from "./components/Upload";
 import Likes from "./components/Likes";
+import Lyrics from "./components/Lyrics";
 
 let playlist = [
   {
@@ -21,7 +28,7 @@ let playlist = [
     artistName: "Led Zeppelin",
     albumName: "Led Zeppelin IV",
     audioSrc: sth,
-    lyricsSrc: "../../assets/lyrics/Stairway_to_heaven.txt",
+    lyricsSrc: sthlyrics,
     albumArtSrc: STHART,
     dateAdded: "12/01/2022",
     isLiked: false,
@@ -31,7 +38,7 @@ let playlist = [
     artistName: "Arctic Monkeys",
     albumName: "AM",
     audioSrc: dirwk,
-    lyricsSrc: "../../assets/songs/Do I Really Wanna Know.txt",
+    lyricsSrc: dirwklyrics,
     albumArtSrc: DIRWKART,
     dateAdded: "11/27/2022",
     isLiked: false,
@@ -41,9 +48,19 @@ let playlist = [
     artistName: "Maroon 5",
     albumName: "V",
     audioSrc: sugar,
-    lyricsSrc: "../../assets/lyrics/Sugar-Maroon5.txt",
+    lyricsSrc: sugarlyrics,
     albumArtSrc: SUGARART,
     dateAdded: "12/05/2022",
+    isLiked: false,
+  },
+  {
+    songName: "The Less I Know the Better",
+    artistName: "Tame Impala",
+    albumName: "Currents",
+    audioSrc: tliktb,
+    lyricsSrc: tliktblyrics,
+    albumArtSrc: TLIKTBART,
+    dateAdded: "12/08/2022",
     isLiked: false,
   },
 ];
@@ -62,6 +79,7 @@ function App() {
   const [isRepeat, setIsRepeat] = useState(false);
   const [volumePercentage, setVolumePercentage] = useState(1);
   const [currentList, setCurrentList] = useState([]);
+  const [currentLyrics, setCurrentLyrics] = useState("");
 
   let playingAudioRef = useRef(new Audio());
   const intervalRef = useRef();
@@ -100,12 +118,12 @@ function App() {
   };
 
   const findListIndex = (songlist, song) => {
-    for(let i = 0; i < songlist.length; i++) {
+    for (let i = 0; i < songlist.length; i++) {
       if (songlist[i].songName === song.songName) {
         return i;
       }
     }
-  } 
+  };
 
   const updateRecents = (song) => {
     for (let i = 0; i < masterlist.length; i++) {
@@ -118,7 +136,7 @@ function App() {
     }
     setMasterlist([song, ...masterlist]);
     return;
-  }
+  };
 
   return (
     <>
@@ -156,7 +174,9 @@ function App() {
           currentList,
           setCurrentList,
           findListIndex,
-          updateRecents
+          updateRecents,
+          currentLyrics,
+          setCurrentLyrics,
         }}
       >
         <Routes>
@@ -165,6 +185,7 @@ function App() {
             <Route path="/library" element={<Library />} />
             <Route path="/upload" element={<Upload />} />
             <Route path="/likes" element={<Likes />} />
+            <Route path="/lyrics" element={<Lyrics />} />
           </Route>
         </Routes>
       </songContext.Provider>

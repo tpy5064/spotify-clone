@@ -7,8 +7,10 @@ import skipBackwardIcon from "../../assets/svg/skip_back.svg";
 import shuffleIcon from "../../assets/svg/shuffle.svg";
 import repeatIcon from "../../assets/svg/repeat.svg";
 import volumeIcon from "../../assets/svg/volume.svg";
+import micIcon from "../../assets/svg/microphone.svg";
 import { useState, useContext } from "react";
 import { songContext } from "../Contexts/songContext";
+import { NavLink } from "react-router-dom";
 
 const Controls = () => {
   const {
@@ -39,35 +41,47 @@ const Controls = () => {
     currentList,
   } = useContext(songContext);
 
-  
-
   const playPercentage = songDuration
     ? `${(currentTime / songDuration) * 100}%`
     : "0%";
 
+  const randomExcluded = (min, max, excluded) => {
+    let n = Math.floor(Math.random() * (max - min) + min);
+    if (n >= excluded) n++;
+    return n;
+  };
+
   const skipForward = (song) => {
     let idx = findListIndex(currentList, song);
-    if (idx < currentList.length - 1) {
-      idx++;
+    if (!isShuffle) {
+      if (idx < currentList.length - 1) {
+        idx++;
+      } else {
+        idx = 0;
+      }
     } else {
-      idx = 0;
+      idx = randomExcluded(0, currentList.length - 1, idx);
     }
-    setSongPlaying(currentList[idx])
+    setSongPlaying(currentList[idx]);
     handlePlayingAudio(currentList[idx].audioSrc);
     setPlayStatus(true);
-  }
+  };
 
   const skipBackward = (song) => {
     let idx = findListIndex(currentList, song);
-    if (idx > 0) {
-      idx--;
+    if (!isShuffle) {
+      if (idx > 0) {
+        idx--;
+      } else {
+        idx = currentList.length - 1;
+      }
     } else {
-      idx = currentList.length - 1;
+      idx = randomExcluded(0, currentList.length - 1, idx);
     }
-    setSongPlaying(currentList[idx])
+    setSongPlaying(currentList[idx]);
     handlePlayingAudio(currentList[idx].audioSrc);
     setPlayStatus(true);
-  }
+  };
 
   return (
     <div className="controls">
@@ -87,7 +101,11 @@ const Controls = () => {
             />
             <div className={isShuffle ? "is-active" : ""}></div>
           </button>
-          <button onClick={() => {skipBackward(songPlaying)}}>
+          <button
+            onClick={() => {
+              skipBackward(songPlaying);
+            }}
+          >
             <img src={skipBackwardIcon} alt="Skip Back Icon" />
           </button>
           <button onClick={() => {}}>
@@ -101,14 +119,23 @@ const Controls = () => {
               }}
             />
           </button>
-          <button onClick={() => {skipForward(songPlaying)}}>
+          <button
+            onClick={() => {
+              skipForward(songPlaying);
+            }}
+          >
             <img src={skipForwardIcon} alt="Skip Forward Icon" />
           </button>
           <button>
-            <img src={repeatIcon} alt="Repeat Icon" className="repeat-icon" onClick={() => {
-              isRepeat ? handleNoRepeat() : handleRepeat();
-              setIsRepeat(!isRepeat);
-            }}/>
+            <img
+              src={repeatIcon}
+              alt="Repeat Icon"
+              className="repeat-icon"
+              onClick={() => {
+                isRepeat ? handleNoRepeat() : handleRepeat();
+                setIsRepeat(!isRepeat);
+              }}
+            />
             <div className={isRepeat ? "is-active" : ""}></div>
           </button>
         </div>
@@ -140,6 +167,14 @@ const Controls = () => {
         </div>
       </div>
       <div className="volume">
+        <NavLink
+          to="/lyrics"
+          className="lyrics-btn"
+          exact="true"
+          activeclassname="active"
+        >
+          <img src={micIcon} alt="Lyrics Icon" />
+        </NavLink>
         <button>
           <img src={volumeIcon} alt="Volume Icon" />
         </button>
