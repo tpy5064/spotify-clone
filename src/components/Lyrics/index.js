@@ -17,11 +17,11 @@ const Lyrics = () => {
   const lyricsRef = useRef(null);
   useEffect(() => {
     DisplayLyrics();
+    
   });
 
   useEffect(() => {
-    lyricsRef.current.scrollTop = currentTime / songDuration;
-    console.log(currentTime/songDuration);
+    lyricsRef.current.scrollTop = (currentTime / songDuration) * lyricsRef.current.clientHeight;
   }, [currentTime, songDuration]);
 
   const [lyrics, setLyrics] = useState('Play a Song to See its lyrics!');
